@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import UsersTable from 'components/users-table';
-import EditUserModal from 'components/edit-user';
+import UserModalForm from 'components/user-form';
 import { CreateUserModal } from 'components/create-user';
 import { Button, Stack, styled, Typography } from '@mui/material';
 import MainCard from 'components/MainCard';
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { useLazyUsers } from 'api/useUsers';
+//import { useLazyUsers } from 'api/useUsers';
 
 const usuariosMock = [
   {
@@ -101,26 +101,33 @@ const UsersAdminInfo = () => {
   const [modalEditarOpen, setModalEditarOpen] = useState(false);
   const [modalCrearOpen, setModalCrearOpen] = useState(false);
 
+  //?Activar cuando se tenga el endpoint de la API
+  /* //!request para obtener los usuarios
   const { data, isLoading, isError, errorMessage } = useLazyUsers({ page: 1, limit: 10 });
-  console.log('Esta es la data', data);
+  console.log(data); */
+  //!Fin request para obtener los usuarios
+  /* if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error: {errorMessage || 'Something went wrong'}</div>; */
+  //?Fin activar cuando se tenga el endpoint de la API
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error: {errorMessage || 'Something went wrong'}</div>;
-
+  //!Modificar para usar el endpoint de la API
   const handleEdit = (id) => {
     const usuario = usuarios.find((u) => u.id === id);
     setUsuarioSeleccionado(usuario);
     setModalEditarOpen(true);
   };
 
+  //!Modificar para usar el endpoint de la API
   const handleDelete = (id) => {
     setUsuarios(usuarios.filter((u) => u.id !== id));
   };
 
+  //!Modificar para usar el endpoint de la API
   const handleSave = (usuarioEditado) => {
     setUsuarios(usuarios.map((u) => (u.id === usuarioEditado.id ? usuarioEditado : u)));
   };
 
+  //!Modificar para usar el endpoint de la API
   const handleCreate = (nuevoUsuario) => {
     nuevoUsuario.id = usuarios.length + 1; // Simular un ID único
     setUsuarios([...usuarios, nuevoUsuario]);
@@ -135,13 +142,14 @@ const UsersAdminInfo = () => {
             Agregar deportista
           </StyledButton>
           <UsersTable usuarios={usuarios} onEdit={handleEdit} onDelete={handleDelete} />
-          <EditUserModal
+          <UserModalForm
+            modalType={'edit'}
             open={modalEditarOpen}
             handleClose={() => setModalEditarOpen(false)}
             usuarioData={usuarioSeleccionado}
             onSave={handleSave}
           />
-          <CreateUserModal open={modalCrearOpen} handleClose={() => setModalCrearOpen(false)} onSave={handleCreate} />
+          <CreateUserModal modalType={'create'} open={modalCrearOpen} handleClose={() => setModalCrearOpen(false)} onSave={handleCreate} />
         </Stack>
       </MainCard>
     </Stack>

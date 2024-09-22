@@ -15,6 +15,7 @@ import {
 import DatePickerField from 'components/date-picker';
 import InputAdornment from '@mui/material/InputAdornment';
 import { Stack } from '@mui/system';
+import PropTypes from 'prop-types';
 const StyledStack = styled(Stack)`
   position: absolute;
   top: 50%;
@@ -31,7 +32,7 @@ const StyledStack = styled(Stack)`
   }
 `;
 
-const EditUserModal = ({ open, handleClose, usuarioData, onSave }) => {
+const UserModalForm = ({ modalType, open, handleClose, usuarioData, onSave }) => {
   const [usuario, setUsuario] = useState(usuarioData || {});
 
   useEffect(() => {
@@ -45,13 +46,7 @@ const EditUserModal = ({ open, handleClose, usuarioData, onSave }) => {
     });
   };
 
-  const handleSelectChange = (e) => {
-    setUsuario({
-      ...usuario,
-      [e.target.name]: e.target.value
-    });
-  };
-
+  //!Modificar para usar el endpoint de la API
   const handleSubmit = () => {
     onSave(usuario);
     handleClose();
@@ -60,7 +55,7 @@ const EditUserModal = ({ open, handleClose, usuarioData, onSave }) => {
   return (
     <Modal open={open} onClose={handleClose}>
       <StyledStack spacing={3}>
-        <h2>Editar Usuario</h2>
+        {modalType === 'create' ? <h2>Crear Usuario</h2> : <h2>Editar Usuario</h2>}
         <TextField label="Nombre" name="nombre" value={usuario?.nombre || ''} onChange={handleChange} fullWidth margin="normal" />
         <FormControl>
           <FormLabel id="affiliate-buttons-group-label">Tipo de Afiliación</FormLabel>
@@ -76,7 +71,7 @@ const EditUserModal = ({ open, handleClose, usuarioData, onSave }) => {
             id="category-items-group"
             name="categoria"
             value={usuario?.categoria || ''}
-            onChange={handleSelectChange}
+            onChange={handleChange}
           >
             <MenuItem value="iniciacion">Iniciación</MenuItem>
             <MenuItem value="Sub.10">Sub 10</MenuItem>
@@ -123,4 +118,12 @@ const EditUserModal = ({ open, handleClose, usuarioData, onSave }) => {
   );
 };
 
-export default EditUserModal;
+export default UserModalForm;
+
+UserModalForm.propTypes = {
+  modalType: PropTypes.string.isRequired,
+  open: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  usuarioData: PropTypes.object,
+  onSave: PropTypes.func.isRequired
+};

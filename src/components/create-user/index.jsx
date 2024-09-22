@@ -1,5 +1,5 @@
-import EditarUsuarioModal from 'components/edit-user';
+import UserModalForm from 'components/user-form';
 
 export const CreateUserModal = (props) => {
-  return <EditarUsuarioModal {...props} usuarioData={{}} />;
+  return <UserModalForm {...props} usuarioData={{}} />;
 };
