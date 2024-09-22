@@ -5,7 +5,8 @@ import { CreateUserModal } from 'components/create-user';
 import { Button, Stack, styled, Typography } from '@mui/material';
 import MainCard from 'components/MainCard';
 import { PlusCircleOutlined } from '@ant-design/icons';
-//import usuariosMock from '../../data/users';
+import { useLazyUsers } from 'api/useUsers';
+
 const usuariosMock = [
   {
     id: 1,
@@ -99,6 +100,12 @@ const UsersAdminInfo = () => {
   const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(null);
   const [modalEditarOpen, setModalEditarOpen] = useState(false);
   const [modalCrearOpen, setModalCrearOpen] = useState(false);
+
+  const { data, isLoading, isError, errorMessage } = useLazyUsers({ page: 1, limit: 10 });
+  console.log('Esta es la data', data);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error: {errorMessage || 'Something went wrong'}</div>;
 
   const handleEdit = (id) => {
     const usuario = usuarios.find((u) => u.id === id);

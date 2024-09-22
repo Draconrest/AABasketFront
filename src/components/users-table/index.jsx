@@ -15,6 +15,7 @@ import {
 import { EditOutlined } from '@ant-design/icons';
 import { DeleteOutlined } from '@ant-design/icons';
 import MainCard from 'components/MainCard';
+import PropTypes from 'prop-types';
 
 const StyledTextField = styled(TextField)`
   margin-bottom: 16px;
@@ -74,7 +75,7 @@ const UsersTable = ({ usuarios, onEdit, onDelete }) => {
                 <TableCell>{usuario.categoria}</TableCell>
                 <TableCell>{usuario.telefono}</TableCell>
                 <TableCell>
-                  <IconButton onClick={() => onEdit(usuario.id)} color="primary">
+                  <IconButton onClick={() => onEdit(usuario.id)} color="success">
                     <EditOutlined />
                   </IconButton>
                   <IconButton onClick={() => onDelete(usuario.id)} color="error">
@@ -103,3 +104,9 @@ const UsersTable = ({ usuarios, onEdit, onDelete }) => {
 };
 
 export default UsersTable;
+
+UsersTable.propTypes = {
+  usuarios: PropTypes.array.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired
+};
