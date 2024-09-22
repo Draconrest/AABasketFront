@@ -6,6 +6,7 @@ export const initialState = {
   isLoggedIn: false,
   isInitialized: false,
   user: null
+  //token: null,
 };
 
 // ==============================|| AUTH REDUCER ||============================== //
@@ -20,12 +21,14 @@ const auth = (state = initialState, action) => {
       };
     }
     case LOGIN: {
-      const { user } = action.payload;
+      const { user /* token */ } = action.payload;
+      //console.log("Este es el action", action.payload);
       return {
         ...state,
         isLoggedIn: true,
         isInitialized: true,
         user
+        //token,
       };
     }
     case LOGOUT: {
@@ -34,6 +37,7 @@ const auth = (state = initialState, action) => {
         isInitialized: true,
         isLoggedIn: false,
         user: null
+        //token: null,
       };
     }
     default: {
