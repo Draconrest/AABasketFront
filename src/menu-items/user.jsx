@@ -11,23 +11,15 @@ const icons = {
 
 const user = {
   id: 'users-group',
-  title: 'Administración de Usuarios',
+  title: 'Administración de deportistas',
   type: 'group',
   children: [
     {
       id: 'viewUsers',
-      title: 'Ver Usuarios',
+      title: 'Ver deportistas activos',
       type: 'item',
       url: '/users/view',
       icon: icons.FundViewOutlined,
-      breadcrumbs: false
-    },
-    {
-      id: 'newUser',
-      title: 'Agregar Usuario',
-      type: 'item',
-      url: '/users/new',
-      icon: icons.ProjectOutlined,
       breadcrumbs: false
     }
   ]

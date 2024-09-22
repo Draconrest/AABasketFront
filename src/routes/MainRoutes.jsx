@@ -12,6 +12,7 @@ const DashboardDefault = Loadable(lazy(() => import('pages/dashboard/index')));
 
 // render - sample page
 const SamplePage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
+const UsersInfo = Loadable(lazy(() => import('pages/admin-users/index')));
 /* const Param = Loadable(lazy(() => import("pages/param-cards/index")));
 const ProjectSheet = Loadable(lazy(() => import("pages/project-sheet/index")));
 const ProjectTable = Loadable(lazy(() => import("pages/project-table/index")));
@@ -55,12 +56,26 @@ const MainRoutes = {
       path: 'users',
       children: [
         {
-          path: 'new',
-          element: <div>Nuevo usuario</div>
-        },
+          path: 'view',
+          element: <UsersInfo />
+        }
+      ]
+    },
+    {
+      path: 'whatsapp',
+      children: [
+        {
+          path: 'message',
+          element: <div>Escribir mensaje</div>
+        }
+      ]
+    },
+    {
+      path: 'billing',
+      children: [
         {
           path: 'view',
-          element: <div>Vista de usuarios</div>
+          element: <div>Mostrar facturacion</div>
         }
       ]
     }
