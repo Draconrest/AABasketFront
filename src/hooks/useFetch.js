@@ -18,7 +18,7 @@ const fetcher = async (url, token) => {
 };
 
 export function useLazyFetch(endpoint, params = {}, token = null) {
-  const { data, error } = useSWR({ endpoint, params }, (url) => fetcher(url, token), {
+  const { data, error, mutate } = useSWR({ endpoint, params }, (url) => fetcher(url, token), {
     revalidateIfStale: false,
     revalidateOnFocus: false,
     revalidateOnReconnect: false
@@ -28,6 +28,7 @@ export function useLazyFetch(endpoint, params = {}, token = null) {
     data: data,
     isLoading: !error && !data,
     isError: error,
-    errorMessage: error?.message || null //! Devolver el mensaje del error para manejarlo en el frontend
+    errorMessage: error?.message || null, //! Devolver el mensaje del error para manejarlo en el frontend
+    mutate
   };
 }

@@ -11,136 +11,58 @@ import { PlusCircleOutlined } from '@ant-design/icons';
 //! API
 import { useLazyUsers } from 'api/useUsers';
 import { useCreateUser } from 'hooks/usePost';
-
-/* const usuariosMock = [
-  {
-    id: 1,
-    nombre: 'Carlos López',
-    tipoAfiliacion: 'Regular',
-    fechaMatricula: '2023-01-10',
-    valorMensualidad: 50,
-    categoria: 'Junior',
-    telefono: '3124567890'
-  },
-  {
-    id: 2,
-    nombre: 'Ana Martínez',
-    tipoAfiliacion: 'Premium',
-    fechaMatricula: '2022-12-01',
-    valorMensualidad: 70,
-    categoria: 'Senior',
-    telefono: '3157896543'
-  },
-  {
-    id: 3,
-    nombre: 'Luis Rodríguez',
-    tipoAfiliacion: 'Regular',
-    fechaMatricula: '2023-03-15',
-    valorMensualidad: 50,
-    categoria: 'Juvenil',
-    telefono: '3101234567'
-  },
-  {
-    id: 4,
-    nombre: 'Carlos López',
-    tipoAfiliacion: 'Regular',
-    fechaMatricula: '2023-01-10',
-    valorMensualidad: 50,
-    categoria: 'Junior',
-    telefono: '3124567890'
-  },
-  {
-    id: 5,
-    nombre: 'Ana Martínez',
-    tipoAfiliacion: 'Premium',
-    fechaMatricula: '2022-12-01',
-    valorMensualidad: 70,
-    categoria: 'Senior',
-    telefono: '3157896543'
-  },
-  {
-    id: 6,
-    nombre: 'Luis Rodríguez',
-    tipoAfiliacion: 'Regular',
-    fechaMatricula: '2023-03-15',
-    valorMensualidad: 50,
-    categoria: 'Juvenil',
-    telefono: '3101234567'
-  },
-  {
-    id: 7,
-    nombre: 'Carlos López',
-    tipoAfiliacion: 'Regular',
-    fechaMatricula: '2023-01-10',
-    valorMensualidad: 50,
-    categoria: 'Junior',
-    telefono: '3124567890'
-  },
-  {
-    id: 8,
-    nombre: 'Ana Martínez',
-    tipoAfiliacion: 'Premium',
-    fechaMatricula: '2022-12-01',
-    valorMensualidad: 70,
-    categoria: 'Senior',
-    telefono: '3157896543'
-  },
-  {
-    id: 9,
-    nombre: 'Luis Rodríguez',
-    tipoAfiliacion: 'Regular',
-    fechaMatricula: '2023-03-15',
-    valorMensualidad: 50,
-    categoria: 'Juvenil',
-    telefono: '3101234567'
-  }
-]; */
+import { useDeleteUser } from 'hooks/useDelete';
+import { useUpdateUser } from 'hooks/useUpdate';
 
 const StyledButton = styled(Button)`
   margin-bottom: 16px;
-  width: 8%;
+  width: 20%;
 `;
 const UsersAdminInfo = () => {
   const { data: usuarios, isLoading, isError, errorMessage, mutate } = useLazyUsers(null);
-  const { createUser, isLoading: isCreating, /* isError: isCreateError */ error: createError } = useCreateUser();
-  //const [usuarios, setUsuarios] = useState([]);
+  const { createUser, isLoading: isCreating, error: createError } = useCreateUser();
+  const { deleteUser } = useDeleteUser();
+  const { updateUser } = useUpdateUser();
   const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(null);
   const [modalEditarOpen, setModalEditarOpen] = useState(false);
   const [modalCrearOpen, setModalCrearOpen] = useState(false);
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
 
-  //!Modificar para usar el endpoint de la API
   const handleEdit = (id) => {
     const usuario = usuarios.find((u) => u.id === id);
-    console.log('Usuario seleccionado', usuario);
     setUsuarioSeleccionado(usuario);
     setModalEditarOpen(true);
   };
 
-  //!Modificar para usar el endpoint de la API
-  const handleDelete = (id) => {
-    setUsuarios(usuarios.filter((u) => u.id !== id));
+  const handleDelete = async (id) => {
+    try {
+      await deleteUser(id);
+      setSnackbar({ open: true, message: 'Usuario eliminado exitosamente', severity: 'success' });
+      mutate();
+    } catch (error) {
+      setSnackbar({ open: true, message: 'Error al eliminar el usuario', severity: 'error' });
+    }
   };
 
-  //!Modificar para usar el endpoint de la API
-  const handleSave = (usuarioEditado) => {
-    setUsuarios(usuarios.map((u) => (u.id === usuarioEditado.id ? usuarioEditado : u)));
+  const handleSave = async (userData) => {
+    try {
+      await updateUser(userData);
+      setSnackbar({ open: true, message: 'Usuario actualizado exitosamente', severity: 'success' });
+      //mutate(); // Refrescar los datos de usuarios
+      mutate();
+    } catch (error) {
+      setSnackbar({ open: true, message: createError || 'Error al actualizar el usuario', severity: 'error' });
+    }
   };
-
-  //!Modificar para usar el endpoint de la API
-  /*  const handleCreate = (nuevoUsuario) => {
-    setUsuarios([...usuarios, nuevoUsuario]);
-  }; */
 
   const handleCreateUser = async (userData) => {
     try {
       await createUser(userData);
       setSnackbar({ open: true, message: 'Usuario creado exitosamente', severity: 'success' });
-      //setModalOpen(false);
-      mutate(); // Refrescar los datos de usuarios
+      //mutate(); // Refrescar los datos de usuarios
+      mutate();
     } catch (error) {
       setSnackbar({ open: true, message: createError || 'Error al crear el usuario', severity: 'error' });
-      console.log('Error al crear el usuario', createError);
     }
   };
 

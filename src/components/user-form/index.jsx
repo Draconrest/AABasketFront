@@ -66,6 +66,7 @@ const UserModalForm = ({ modalType, open, handleClose, usuarioData, onSave, isLo
   const handleSubmit = (e) => {
     e.preventDefault();
     onSave(formData);
+    handleClose();
   };
 
   return (

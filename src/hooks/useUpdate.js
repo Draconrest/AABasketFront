@@ -1,26 +1,26 @@
-// hooks/useCreateUser.js
 import { useState } from 'react';
 import axios from 'axios';
 
 const endpoint = import.meta.env.VITE_PUBLIC_HOST_ENDPOINT + '/users';
 
-export function useCreateUser() {
+export function useUpdateUser() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(null);
 
-  const createUser = async (userData) => {
+  const updateUser = async (userData) => {
+    const updateEndpoint = `${endpoint}/${userData.id}`;
     setIsLoading(true);
     setIsError(null);
     try {
-      const response = await axios.post(endpoint, userData);
+      const response = await axios.put(updateEndpoint, userData);
       setIsLoading(false);
       return response.data;
     } catch (error) {
-      setIsError(error.response?.data || 'Error al crear el usuario');
+      setIsError(error.response?.data || 'Error al actualizar el usuario');
       setIsLoading(false);
       throw error;
     }
   };
 
-  return { createUser, isLoading, isError };
+  return { updateUser, isLoading, isError };
 }
