@@ -1,4 +1,3 @@
-// hooks/useFetch.js
 import useSWR from 'swr';
 import axios from 'axios';
 
