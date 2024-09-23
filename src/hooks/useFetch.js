@@ -4,7 +4,6 @@ import axios from 'axios';
 
 const fetcher = async (url, token) => {
   const { endpoint, params } = url;
-  console.log('fetcher', url);
   const queryString = params ? `?${new URLSearchParams(params).toString()}` : '';
   const fullUrl = `${endpoint}${queryString}`;
 

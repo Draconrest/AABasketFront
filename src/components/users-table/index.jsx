@@ -69,9 +69,9 @@ const UsersTable = ({ usuarios, onEdit, onDelete }) => {
             {filteredUsuarios.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((usuario) => (
               <TableRow key={usuario.id}>
                 <TableCell>{usuario.nombre}</TableCell>
-                <TableCell>{usuario.tipoAfiliacion}</TableCell>
-                <TableCell>{usuario.fechaMatricula}</TableCell>
-                <TableCell>{`$ ${usuario.valorMensualidad}`}</TableCell>
+                <TableCell>{usuario.tipo_afiliacion}</TableCell>
+                <TableCell>{usuario.fecha_matricula}</TableCell>
+                <TableCell>{`$ ${usuario.valor_mensualidad}`}</TableCell>
                 <TableCell>{usuario.categoria}</TableCell>
                 <TableCell>{usuario.telefono}</TableCell>
                 <TableCell>
