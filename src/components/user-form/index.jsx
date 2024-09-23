@@ -90,8 +90,8 @@ const UserModalForm = ({ modalType, open, handleClose, usuarioData, onSave, isLo
                 value={formData?.tipo_afiliacion || ''}
                 onChange={handleChange}
               >
-                <FormControlLabel value="full" control={<Radio />} label="Full" />
-                <FormControlLabel value="ticket" control={<Radio />} label="Ticketera" />
+                <FormControlLabel value="Full" control={<Radio />} label="Full" />
+                <FormControlLabel value="Ticket" control={<Radio />} label="Ticketera" />
               </RadioGroup>
             </FormControl>
             <FormControl>
@@ -106,8 +106,8 @@ const UserModalForm = ({ modalType, open, handleClose, usuarioData, onSave, isLo
                 <MenuItem value="iniciacion">Iniciación</MenuItem>
                 <MenuItem value="Sub.10">Sub 10</MenuItem>
                 <MenuItem value="Sub.13">Sub 13</MenuItem>
-                <MenuItem value="May.Mas">Mayores hombres</MenuItem>
-                <MenuItem value="May.Fem">Mayores mujeres</MenuItem>
+                <MenuItem value="May.mas">Mayores hombres</MenuItem>
+                <MenuItem value="May.fem">Mayores mujeres</MenuItem>
               </Select>
             </FormControl>
 
