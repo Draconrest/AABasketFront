@@ -9,10 +9,10 @@ import ListItemText from '@mui/material/ListItemText';
 
 // assets
 import EditOutlined from '@ant-design/icons/EditOutlined';
-import ProfileOutlined from '@ant-design/icons/ProfileOutlined';
+//import ProfileOutlined from '@ant-design/icons/ProfileOutlined';
 import LogoutOutlined from '@ant-design/icons/LogoutOutlined';
 import UserOutlined from '@ant-design/icons/UserOutlined';
-import WalletOutlined from '@ant-design/icons/WalletOutlined';
+//import WalletOutlined from '@ant-design/icons/WalletOutlined';
 
 // ==============================|| HEADER PROFILE - PROFILE TAB ||============================== //
 
@@ -29,16 +29,16 @@ export default function ProfileTab() {
         <ListItemIcon>
           <EditOutlined />
         </ListItemIcon>
-        <ListItemText primary="Edit Profile" />
+        <ListItemText primary="Editar Perfil" />
       </ListItemButton>
       <ListItemButton selected={selectedIndex === 1} onClick={(event) => handleListItemClick(event, 1, '/apps/profiles/account/basic')}>
         <ListItemIcon>
           <UserOutlined />
         </ListItemIcon>
-        <ListItemText primary="View Profile" />
+        <ListItemText primary="Ver Perfil" />
       </ListItemButton>
 
-      <ListItemButton selected={selectedIndex === 3} onClick={(event) => handleListItemClick(event, 3, 'apps/profiles/account/personal')}>
+      {/* <ListItemButton selected={selectedIndex === 3} onClick={(event) => handleListItemClick(event, 3, 'apps/profiles/account/personal')}>
         <ListItemIcon>
           <ProfileOutlined />
         </ListItemIcon>
@@ -49,12 +49,12 @@ export default function ProfileTab() {
           <WalletOutlined />
         </ListItemIcon>
         <ListItemText primary="Billing" />
-      </ListItemButton>
+      </ListItemButton> */}
       <ListItemButton selected={selectedIndex === 2}>
         <ListItemIcon>
           <LogoutOutlined />
         </ListItemIcon>
-        <ListItemText primary="Logout" />
+        <ListItemText primary="Salir" />
       </ListItemButton>
     </List>
   );

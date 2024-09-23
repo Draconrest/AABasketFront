@@ -29,8 +29,8 @@ export default function Header() {
   // header content
   const headerContent = useMemo(() => <HeaderContent />, []);
 
-  const iconBackColor = 'grey.100';
-  const iconBackColorOpen = 'grey.200';
+  const iconBackColor = theme.palette.background.icons;
+  const iconBackColorOpen = theme.palette.background.icons;
 
   // common header
   const mainHeader = (
@@ -56,8 +56,9 @@ export default function Header() {
     color: 'inherit',
     elevation: 0,
     sx: {
-      borderBottom: `1px solid ${theme.palette.divider}`
-      // boxShadow: theme.customShadows.z1
+      borderBottom: `1px solid ${theme.palette.divider}`,
+      //boxShadow: theme.customShadows.z1,
+      bgcolor: theme.palette.background.banner
     }
   };
 

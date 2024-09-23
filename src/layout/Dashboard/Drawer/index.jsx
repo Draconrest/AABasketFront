@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useMemo } from 'react';
 
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 
@@ -16,6 +17,7 @@ import { handlerDrawerOpen, useGetMenuMaster } from 'api/menu';
 // ==============================|| MAIN LAYOUT - DRAWER ||============================== //
 
 export default function MainDrawer({ window }) {
+  const theme = useTheme();
   const { menuMaster } = useGetMenuMaster();
   const drawerOpen = menuMaster.isDashboardDrawerOpened;
   const matchDownMD = useMediaQuery((theme) => theme.breakpoints.down('lg'));
@@ -49,7 +51,9 @@ export default function MainDrawer({ window }) {
               borderRight: '1px solid',
               borderRightColor: 'divider',
               backgroundImage: 'none',
-              boxShadow: 'inherit'
+              boxShadow: 'inherit',
+              bgcolor: theme.palette.background.test
+              //backgroundColor: '#000'
             }
           }}
         >

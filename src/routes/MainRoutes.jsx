@@ -13,6 +13,7 @@ const DashboardDefault = Loadable(lazy(() => import('pages/dashboard/index')));
 // render - sample page
 const SamplePage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
 const UsersInfo = Loadable(lazy(() => import('pages/admin-users/index')));
+const HomePage = Loadable(lazy(() => import('pages/infography/index')));
 /* const Param = Loadable(lazy(() => import("pages/param-cards/index")));
 const ProjectSheet = Loadable(lazy(() => import("pages/project-sheet/index")));
 const ProjectTable = Loadable(lazy(() => import("pages/project-table/index")));
@@ -25,7 +26,7 @@ const MainRoutes = {
   children: [
     {
       path: '/',
-      element: <DashboardDefault />
+      element: <HomePage />
     },
     {
       path: 'color',

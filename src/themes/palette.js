@@ -51,7 +51,9 @@ export default function Palette(mode, presetColor) {
       divider: paletteColor.grey[200],
       background: {
         paper: paletteColor.grey[0],
-        default: paletteColor.grey.A50
+        default: paletteColor.grey.A50,
+        banner: paletteColor.primary.main,
+        icons: paletteColor.primary.light
       }
     }
   });

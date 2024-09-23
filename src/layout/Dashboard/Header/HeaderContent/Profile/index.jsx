@@ -19,14 +19,14 @@ import Box from '@mui/material/Box';
 
 // project import
 import ProfileTab from './ProfileTab';
-import SettingTab from './SettingTab';
+//import SettingTab from './SettingTab';
 import Avatar from 'components/@extended/Avatar';
 import MainCard from 'components/MainCard';
 import Transitions from 'components/@extended/Transitions';
 
 // assets
 import LogoutOutlined from '@ant-design/icons/LogoutOutlined';
-import SettingOutlined from '@ant-design/icons/SettingOutlined';
+//import SettingOutlined from '@ant-design/icons/SettingOutlined';
 import UserOutlined from '@ant-design/icons/UserOutlined';
 import avatar1 from 'assets/images/users/avatar-1.png';
 
@@ -70,16 +70,16 @@ export default function Profile() {
     setValue(newValue);
   };
 
-  const iconBackColorOpen = 'grey.100';
+  //const iconBackColorOpen = 'grey.100';
 
   return (
     <Box sx={{ flexShrink: 0, ml: 0.75 }}>
       <ButtonBase
         sx={{
           p: 0.25,
-          bgcolor: open ? iconBackColorOpen : 'transparent',
+          bgcolor: open ? theme.palette.primary.light : 'transparent',
           borderRadius: 1,
-          '&:hover': { bgcolor: 'secondary.lighter' },
+          '&:hover': { bgcolor: 'primary.light' },
           '&:focus-visible': { outline: `2px solid ${theme.palette.secondary.dark}`, outlineOffset: 2 }
         }}
         aria-label="open profile"
@@ -91,7 +91,7 @@ export default function Profile() {
         <Stack direction="row" spacing={1.25} alignItems="center" sx={{ p: 0.5 }}>
           <Avatar alt="profile user" src={avatar1} size="sm" />
           <Typography variant="subtitle1" sx={{ textTransform: 'capitalize' }}>
-            John Doe
+            Admin
           </Typography>
         </Stack>
       </ButtonBase>
@@ -124,15 +124,15 @@ export default function Profile() {
                         <Stack direction="row" spacing={1.25} alignItems="center">
                           <Avatar alt="profile user" src={avatar1} sx={{ width: 32, height: 32 }} />
                           <Stack>
-                            <Typography variant="h6">John Doe</Typography>
+                            <Typography variant="h6">Administrador</Typography>
                             <Typography variant="body2" color="text.secondary">
-                              UI/UX Designer
+                              Basketball Manager
                             </Typography>
                           </Stack>
                         </Stack>
                       </Grid>
                       <Grid item>
-                        <Tooltip title="Logout">
+                        <Tooltip title="Salir">
                           <IconButton size="large" sx={{ color: 'text.primary' }}>
                             <LogoutOutlined />
                           </IconButton>
@@ -152,10 +152,10 @@ export default function Profile() {
                           textTransform: 'capitalize'
                         }}
                         icon={<UserOutlined style={{ marginBottom: 0, marginRight: '10px' }} />}
-                        label="Profile"
+                        label="Perfil"
                         {...a11yProps(0)}
                       />
-                      <Tab
+                      {/* <Tab
                         sx={{
                           display: 'flex',
                           flexDirection: 'row',
@@ -164,17 +164,17 @@ export default function Profile() {
                           textTransform: 'capitalize'
                         }}
                         icon={<SettingOutlined style={{ marginBottom: 0, marginRight: '10px' }} />}
-                        label="Setting"
+                        label="Ajustes"
                         {...a11yProps(1)}
-                      />
+                      /> */}
                     </Tabs>
                   </Box>
                   <TabPanel value={value} index={0} dir={theme.direction}>
                     <ProfileTab />
                   </TabPanel>
-                  <TabPanel value={value} index={1} dir={theme.direction}>
+                  {/* <TabPanel value={value} index={1} dir={theme.direction}>
                     <SettingTab />
-                  </TabPanel>
+                  </TabPanel> */}
                 </MainCard>
               </ClickAwayListener>
             </Paper>

@@ -25,7 +25,7 @@ export default function Theme(colors) {
 
   return {
     primary: {
-      lighter: blue[0],
+      /* lighter: blue[0],
       100: blue[1],
       200: blue[2],
       light: blue[3],
@@ -35,6 +35,17 @@ export default function Theme(colors) {
       700: blue[7],
       darker: blue[8],
       900: blue[9],
+      contrastText */
+      lighter: gold[0],
+      100: gold[1],
+      200: gold[2],
+      light: gold[3],
+      400: gold[4],
+      main: gold[5],
+      dark: gold[6],
+      700: gold[7],
+      darker: gold[8],
+      900: gold[9],
       contrastText
     },
     secondary: {
@@ -62,11 +73,17 @@ export default function Theme(colors) {
       contrastText
     },
     warning: {
-      lighter: gold[0],
+      /* lighter: gold[0],
       light: gold[3],
       main: gold[5],
       dark: gold[7],
       darker: gold[9],
+      contrastText: greyColors[100] */
+      lighter: blue[0],
+      light: blue[3],
+      main: blue[5],
+      dark: blue[7],
+      darker: blue[9],
       contrastText: greyColors[100]
     },
     info: {
