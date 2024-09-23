@@ -1,10 +1,9 @@
 // assets
-import { ProjectOutlined, FundViewOutlined } from '@ant-design/icons';
+import { WhatsAppOutlined } from '@ant-design/icons';
 
 // icons
 const icons = {
-  ProjectOutlined,
-  FundViewOutlined
+  WhatsAppOutlined
 };
 
 // ==============================|| MENU ITEMS - DASHBOARD ||============================== //
@@ -19,7 +18,7 @@ const whatsappServices = {
       title: 'Envia mensaje',
       type: 'item',
       url: '/whatsapp/message',
-      icon: icons.FundViewOutlined,
+      icon: icons.WhatsAppOutlined,
       breadcrumbs: false
     } /* 
     {

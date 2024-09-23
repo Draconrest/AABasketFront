@@ -28,8 +28,10 @@ export default function Palette(mode, presetColor) {
   let greyAscent = ['#fafafa', '#bfbfbf', '#434343', '#1f1f1f'];
   let greyConstant = ['#fafafb', '#e6ebf1'];
 
-  colors.grey = [...greyPrimary, ...greyAscent, ...greyConstant];
+  let blueAA = ['#8c9296', '#6a7c8a', '#4c667d', '#325170', '#1d3e63', '#0b2b56', '#041630', '#00040a', '#000000'];
 
+  colors.grey = [...greyPrimary, ...greyAscent, ...greyConstant];
+  colors.blueAA = [...blueAA];
   const paletteColor = ThemeOption(colors, presetColor, mode);
 
   return createTheme({
@@ -43,7 +45,8 @@ export default function Palette(mode, presetColor) {
       text: {
         primary: paletteColor.grey[700],
         secondary: paletteColor.grey[500],
-        disabled: paletteColor.grey[400]
+        disabled: paletteColor.grey[400],
+        primaryAA: paletteColor.secondaryAA.main
       },
       action: {
         disabled: paletteColor.grey[300]

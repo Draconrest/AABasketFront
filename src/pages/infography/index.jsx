@@ -24,7 +24,8 @@ const WelcomePage = () => {
               width: '100%',
               height: '100%',
               objectFit: 'cover',
-              borderRadius: '8px'
+              borderRadius: '8px',
+              pointerEvents: 'none'
             }}
           />
         </Grid>
@@ -46,7 +47,8 @@ const WelcomePage = () => {
               sx={{
                 width: '100%',
                 objectFit: 'cover',
-                borderRadius: '8px'
+                borderRadius: '8px',
+                pointerEvents: 'none'
               }}
             />
 
@@ -59,6 +61,7 @@ const WelcomePage = () => {
                 height: '100%',
                 objectFit: 'cover',
                 borderRadius: '8px',
+                pointerEvents: 'none',
                 mt: 0 // Margen superior entre el banner horizontal y la infografía
               }}
             />

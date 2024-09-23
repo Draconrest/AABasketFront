@@ -1,10 +1,9 @@
 // assets
-import { ProjectOutlined, FundViewOutlined } from '@ant-design/icons';
+import { UserOutlined } from '@ant-design/icons';
 
 // icons
 const icons = {
-  ProjectOutlined,
-  FundViewOutlined
+  UserOutlined
 };
 
 // ==============================|| MENU ITEMS - DASHBOARD ||============================== //
@@ -19,7 +18,7 @@ const user = {
       title: 'Ver deportistas activos',
       type: 'item',
       url: '/users/view',
-      icon: icons.FundViewOutlined,
+      icon: icons.UserOutlined,
       breadcrumbs: false
     }
   ]
