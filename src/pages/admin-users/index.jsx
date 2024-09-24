@@ -15,7 +15,7 @@ import { useDeleteUser } from 'hooks/useDelete';
 import { useUpdateUser } from 'hooks/useUpdate';
 
 //! Cambiar por la data de la API
-const users = [
+/* const users = [
   {
     nombre: 'Matias Gúzman',
     tipo_afiliacion: 'Full',
@@ -331,7 +331,7 @@ const users = [
     telefono: '318 8779633',
     activo: true
   }
-];
+]; */
 
 const StyledButton = styled(Button)`
   margin-bottom: 16px;
@@ -367,7 +367,6 @@ const UsersAdminInfo = () => {
     try {
       await updateUser(userData);
       setSnackbar({ open: true, message: 'Usuario actualizado exitosamente', severity: 'success' });
-      //mutate(); // Refrescar los datos de usuarios
       mutate();
     } catch (error) {
       setSnackbar({ open: true, message: createError || 'Error al actualizar el usuario', severity: 'error' });
@@ -378,7 +377,6 @@ const UsersAdminInfo = () => {
     try {
       await createUser(userData);
       setSnackbar({ open: true, message: 'Usuario creado exitosamente', severity: 'success' });
-      //mutate(); // Refrescar los datos de usuarios
       mutate();
     } catch (error) {
       setSnackbar({ open: true, message: createError || 'Error al crear el usuario', severity: 'error' });
@@ -386,8 +384,8 @@ const UsersAdminInfo = () => {
   };
 
   //! Activar cuando se tenga la data de la API
-  //?if (isLoading) return <div>Loading...</div>;
-  //?if (isError) return <div>Error: {errorMessage || 'Something went wrong'}</div>;
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error: {errorMessage || 'Something went wrong'}</div>;
   return (
     <Stack spacing={2}>
       <Typography variant="h3">Administrar Deportistas</Typography>
@@ -396,7 +394,7 @@ const UsersAdminInfo = () => {
           <StyledButton variant="contained" color="primary" startIcon={<PlusCircleOutlined />} onClick={() => setModalCrearOpen(true)}>
             Agregar deportista
           </StyledButton>
-          <UsersTable usuarios={users} onEdit={handleEdit} onDelete={handleDelete} isError={isError} errorMessage={errorMessage} />
+          <UsersTable usuarios={usuarios} onEdit={handleEdit} onDelete={handleDelete} isError={isError} errorMessage={errorMessage} />
           <UserModalForm
             modalType={'edit'}
             open={modalEditarOpen}

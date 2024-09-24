@@ -1,9 +1,23 @@
 import SendWhatsappMessage from 'components/send-message';
-import { Typography, Box } from '@mui/material';
+import { Typography, Box, Snackbar, Alert } from '@mui/material';
 import { Grid } from '@mui/material';
-import background from 'assets/images/whatsapp/background.png';
+import background from 'assets/images/whatsapp/background.webp';
+import { useSendNotification } from 'hooks/useWhatsapp';
+import { useState } from 'react';
 
 const WhatsappServices = () => {
+  const { sendNotification, isLoading /* isError */ } = useSendNotification();
+  const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+
+  const handleSendNotification = async () => {
+    try {
+      await sendNotification();
+      setSnackbar({ open: true, message: 'Notificaciones enviadas exitosamente', severity: 'success' });
+    } catch (error) {
+      setSnackbar({ open: true, message: 'Error al enviar notificaciones', severity: 'error' });
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -48,6 +62,8 @@ const WhatsappServices = () => {
               title={'Enviar Notificación'}
               description={'Envía recordatorio via whatsapp a los usuarios próximos a vencer su fecha de pago.'}
               type={'notification'}
+              onSave={handleSendNotification}
+              isLoading={isLoading}
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -59,6 +75,11 @@ const WhatsappServices = () => {
           </Grid>
         </Grid>
       </Box>
+      <Snackbar open={snackbar.open} autoHideDuration={6000} onClose={() => setSnackbar({ ...snackbar, open: false })}>
+        <Alert onClose={() => setSnackbar({ ...snackbar, open: false })} severity={snackbar.severity} sx={{ width: '100%' }}>
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

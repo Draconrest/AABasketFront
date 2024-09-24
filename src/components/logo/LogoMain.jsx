@@ -2,7 +2,7 @@
 //import { useTheme } from '@mui/material/styles';
 
 //import logoDark from 'assets/images/logo-dark.svg';
-import logo from 'assets/images/logo.png';
+import logo from 'assets/images/logo.webp';
 
 // ==============================|| LOGO SVG ||============================== //
 

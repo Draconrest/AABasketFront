@@ -1,6 +1,6 @@
-import banner_left from 'assets/images/home/banner-left.png';
-import banner from 'assets/images/home/banner-top.jpeg';
-import info from 'assets/images/home/infografia.jpeg';
+import banner_left from 'assets/images/home/banner-left.webp';
+import banner from 'assets/images/home/banner-top.webp';
+import info from 'assets/images/home/infografia.webp';
 
 import { Box, Grid } from '@mui/material';
 

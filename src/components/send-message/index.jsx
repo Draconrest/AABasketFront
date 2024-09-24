@@ -1,10 +1,11 @@
-import { Typography, Button, Box, Grid } from '@mui/material';
+import { Typography, Button, Box, Grid, CircularProgress } from '@mui/material';
 import MainCard from 'components/MainCard';
-import welcome from 'assets/images/whatsapp/welcome.jpeg';
-import notification from 'assets/images/whatsapp/notification.png';
+import welcome from 'assets/images/whatsapp/welcome.webp';
+import notification from 'assets/images/whatsapp/notification.webp';
+import PropTypes from 'prop-types';
 //import { useTheme } from '@mui/material/styles';
 
-const SendWhatsappMessage = ({ title, description, onSave, type }) => {
+const SendWhatsappMessage = ({ title, description, onSave, type, isLoading }) => {
   //const theme = useTheme();
   //const titleColor = theme.palette.secondaryAA.main;
   const isWelcome = type === 'welcome';
@@ -19,8 +20,8 @@ const SendWhatsappMessage = ({ title, description, onSave, type }) => {
           <Typography variant="h5" sx={{ marginBottom: '2rem' }}>
             {description}
           </Typography>
-          <Button variant="contained" onClick={onSave}>
-            Enviar
+          <Button variant="contained" onClick={onSave} disabled={isLoading}>
+            {isLoading ? <CircularProgress size={24} /> : 'Enviar'}
           </Button>
         </Grid>
         <Grid item xs={12} md={6}>
@@ -59,3 +60,11 @@ const SendWhatsappMessage = ({ title, description, onSave, type }) => {
 };
 
 export default SendWhatsappMessage;
+
+SendWhatsappMessage.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  onSave: PropTypes.func.isRequired,
+  type: PropTypes.oneOf(['welcome', 'notification']).isRequired,
+  isLoading: PropTypes.bool
+};
