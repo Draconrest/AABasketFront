@@ -53,7 +53,7 @@ const WhatsappServices = () => {
           padding: '2rem'
         }}
       >
-        <Typography variant="h2" sx={{ marginBottom: '1rem', color: '#325170', fontWeight: '500' }}>
+        <Typography variant="h2" sx={{ marginBottom: '1rem', color: '#325170', fontWeight: 'bold' }}>
           Servicios de Whatsapp
         </Typography>
         <Grid container spacing={2}>

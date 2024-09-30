@@ -9,11 +9,10 @@ import {
   TablePagination,
   TextField,
   TableFooter,
-  IconButton,
-  styled
+  styled,
+  Button
 } from '@mui/material';
-import { EditOutlined } from '@ant-design/icons';
-import { DeleteOutlined } from '@ant-design/icons';
+import { CheckCircleOutlined } from '@ant-design/icons';
 import MainCard from 'components/MainCard';
 import PropTypes from 'prop-types';
 
@@ -21,6 +20,11 @@ const StyledTextField = styled(TextField)`
   margin-bottom: 16px;
   width: 10%;
 `;
+const StyledTableCell = styled(TableCell)(({ theme, estado }) => ({
+  backgroundColor: estado ? theme.palette.success?.lighter : 'inherit'
+}));
+
+// Estilo para la fila de títulos en el encabezado
 const StyledTableHeadRow = styled(TableRow)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
   '& > *': {
@@ -28,7 +32,7 @@ const StyledTableHeadRow = styled(TableRow)(({ theme }) => ({
   }
 }));
 
-const UsersTable = ({ usuarios, onEdit, onDelete }) => {
+const BillsTable = ({ bills, onComplete }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [filter, setFilter] = useState('');
@@ -46,7 +50,7 @@ const UsersTable = ({ usuarios, onEdit, onDelete }) => {
     setFilter(event.target.value);
   };
 
-  const filteredUsuarios = usuarios.filter((usuario) => usuario.nombre.toLowerCase().includes(filter.toLowerCase()));
+  const filteredBills = bills.filter((bill) => bill.nombre.toLowerCase().includes(filter.toLowerCase()));
 
   return (
     <MainCard>
@@ -63,30 +67,31 @@ const UsersTable = ({ usuarios, onEdit, onDelete }) => {
           <TableHead>
             <StyledTableHeadRow>
               <TableCell>Nombre</TableCell>
-              <TableCell>Tipo de Afiliación</TableCell>
-              <TableCell>Fecha de Matrícula</TableCell>
+              <TableCell>Fecha pago realizado</TableCell>
+              <TableCell>Fecha de corte</TableCell>
               <TableCell>Valor Mensualidad</TableCell>
-              <TableCell>Categoría</TableCell>
-              <TableCell>Teléfono</TableCell>
+              <TableCell>Estado de pago</TableCell>
               <TableCell>Acciones</TableCell>
             </StyledTableHeadRow>
           </TableHead>
           <TableBody>
-            {filteredUsuarios.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((usuario) => (
-              <TableRow key={usuario.id}>
-                <TableCell>{usuario.nombre}</TableCell>
-                <TableCell>{usuario.tipo_afiliacion}</TableCell>
-                <TableCell>{usuario.fecha_matricula}</TableCell>
-                <TableCell>{`$ ${usuario.valor_mensualidad}`}</TableCell>
-                <TableCell>{usuario.categoria}</TableCell>
-                <TableCell>{usuario.telefono}</TableCell>
+            {filteredBills.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((bill) => (
+              <TableRow key={bill.id}>
+                <TableCell>{bill.nombre}</TableCell>
+                <TableCell>{bill.fecha_pago}</TableCell>
+                <TableCell>{bill.fecha_vencimiento}</TableCell>
+                <TableCell>{`$ ${bill.monto}`}</TableCell>
+                <StyledTableCell estado={bill.estado}>{bill.estado ? 'Pagado' : 'Pendiente'}</StyledTableCell>
                 <TableCell>
-                  <IconButton onClick={() => onEdit(usuario.id)} color="success">
-                    <EditOutlined />
-                  </IconButton>
-                  <IconButton onClick={() => onDelete(usuario.id)} color="error">
-                    <DeleteOutlined />
-                  </IconButton>
+                  <Button
+                    variant="outlined"
+                    color="success"
+                    startIcon={<CheckCircleOutlined />}
+                    onClick={() => onComplete(bill)}
+                    disabled={bill.estado}
+                  >
+                    Marcar como pagado
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
@@ -95,7 +100,7 @@ const UsersTable = ({ usuarios, onEdit, onDelete }) => {
             <TableRow>
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
-                count={filteredUsuarios.length}
+                count={filteredBills.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
@@ -109,10 +114,9 @@ const UsersTable = ({ usuarios, onEdit, onDelete }) => {
   );
 };
 
-export default UsersTable;
+export default BillsTable;
 
-UsersTable.propTypes = {
-  usuarios: PropTypes.array.isRequired,
-  onEdit: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired
+BillsTable.propTypes = {
+  bills: PropTypes.array.isRequired,
+  onComplete: PropTypes.func.isRequired
 };
