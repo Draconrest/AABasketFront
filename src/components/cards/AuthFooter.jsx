@@ -27,8 +27,8 @@ export default function AuthFooter() {
             variant="subtitle2"
             color="secondary"
             component={Link}
-            href="https://codedthemes.com"
-            target="_blank"
+            //href="https://codedthemes.com"
+            //target="_blank"
             underline="hover"
           >
             Terms and Conditions
@@ -37,8 +37,8 @@ export default function AuthFooter() {
             variant="subtitle2"
             color="secondary"
             component={Link}
-            href="https://codedthemes.com"
-            target="_blank"
+            //href="https://codedthemes.com"
+            //target="_blank"
             underline="hover"
           >
             Privacy Policy
@@ -47,8 +47,8 @@ export default function AuthFooter() {
             variant="subtitle2"
             color="secondary"
             component={Link}
-            href="https://codedthemes.com"
-            target="_blank"
+            //href="https://codedthemes.com"
+            //target="_blank"
             underline="hover"
           >
             CA Privacy Notice
