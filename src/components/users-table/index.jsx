@@ -80,7 +80,7 @@ const UsersTable = ({ usuarios, onEdit, onDelete }) => {
                 <TableCell>{usuario.fecha_matricula}</TableCell>
                 <TableCell>{`$ ${usuario.valor_mensualidad}`}</TableCell>
                 <TableCell>{usuario.categoria}</TableCell>
-                <TableCell>{usuario.telefono}</TableCell>
+                <TableCell>{usuario.telefono.slice(2)}</TableCell>
                 <TableCell>{usuario.fecha_cumpleanos}</TableCell>
                 <TableCell>
                   <IconButton onClick={() => onEdit(usuario.id)} color="success">

@@ -63,9 +63,9 @@ const UserModalForm = ({ modalType, open, handleClose, usuarioData, onSave, isLo
     });
   };
 
-  //!Modificar para usar el endpoint de la API
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('Data a enviar', formData);
     onSave(formData);
     handleClose();
   };

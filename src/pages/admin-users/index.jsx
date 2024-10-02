@@ -32,7 +32,11 @@ const UsersAdminInfo = () => {
 
   const handleEdit = (id) => {
     const usuario = usuarios.find((u) => u.id === id);
-    setUsuarioSeleccionado(usuario);
+    const modifyUser = {
+      ...usuario,
+      telefono: usuario.telefono.slice(2)
+    };
+    setUsuarioSeleccionado(modifyUser);
     setModalEditarOpen(true);
   };
 
