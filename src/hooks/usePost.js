@@ -8,11 +8,15 @@ export function useCreateUser() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(null);
 
-  const createUser = async (userData) => {
+  const createUser = async (userData, token) => {
     setIsLoading(true);
     setIsError(null);
     try {
-      const response = await axios.post(endpoint, userData);
+      const response = await axios.post(endpoint, userData, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       setIsLoading(false);
       return response.data;
     } catch (error) {

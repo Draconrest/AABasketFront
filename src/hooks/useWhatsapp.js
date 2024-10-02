@@ -8,11 +8,15 @@ export function useSendNotification() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(null);
 
-  const sendNotification = async () => {
+  const sendNotification = async (token) => {
     setIsLoading(true);
     setIsError(null);
     try {
-      const response = await axios.get(endpoint);
+      const response = await axios.get(endpoint, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       setIsLoading(false);
       return response.data;
     } catch (error) {

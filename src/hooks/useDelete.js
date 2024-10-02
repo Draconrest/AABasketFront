@@ -8,12 +8,16 @@ export function useDeleteUser() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(null);
 
-  const deleteUser = async (userId) => {
+  const deleteUser = async (userId, token) => {
     const deleteEndpoint = `${endpoint}/${userId}`;
     setIsLoading(true);
     setIsError(null);
     try {
-      const response = await axios.delete(deleteEndpoint, userId);
+      const response = await axios.delete(deleteEndpoint, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       setIsLoading(false);
       return response.data;
     } catch (error) {

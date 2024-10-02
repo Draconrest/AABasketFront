@@ -7,12 +7,16 @@ export function useConfirmeBill() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(null);
 
-  const confirmeBill = async (billData) => {
+  const confirmeBill = async (billData, token) => {
     const confirmeEndpoint = `${endpoint}/${billData.id}`;
     setIsLoading(true);
     setIsError(null);
     try {
-      const response = await axios.put(confirmeEndpoint, billData);
+      const response = await axios.put(confirmeEndpoint, billData, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       setIsLoading(false);
       return response.data;
     } catch (error) {

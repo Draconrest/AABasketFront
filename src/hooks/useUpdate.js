@@ -7,12 +7,16 @@ export function useUpdateUser() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(null);
 
-  const updateUser = async (userData) => {
+  const updateUser = async (userData, token) => {
     const updateEndpoint = `${endpoint}/${userData.id}`;
     setIsLoading(true);
     setIsError(null);
     try {
-      const response = await axios.put(updateEndpoint, userData);
+      const response = await axios.put(updateEndpoint, userData, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       setIsLoading(false);
       return response.data;
     } catch (error) {

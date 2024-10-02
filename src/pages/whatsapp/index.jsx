@@ -4,14 +4,16 @@ import { Grid } from '@mui/material';
 import background from 'assets/images/whatsapp/background.webp';
 import { useSendNotification } from 'hooks/useWhatsapp';
 import { useState } from 'react';
+import { useAuth } from 'contexts/AuthContext';
 
 const WhatsappServices = () => {
+  const { token } = useAuth();
   const { sendNotification, isLoading /* isError */ } = useSendNotification();
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
 
   const handleSendNotification = async () => {
     try {
-      await sendNotification();
+      await sendNotification(token);
       setSnackbar({ open: true, message: 'Notificaciones enviadas exitosamente', severity: 'success' });
     } catch (error) {
       setSnackbar({ open: true, message: 'Error al enviar notificaciones', severity: 'error' });

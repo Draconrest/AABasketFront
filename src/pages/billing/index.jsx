@@ -4,15 +4,17 @@ import { useLazyBills } from 'api/useBills';
 import { useConfirmeBill } from 'hooks/useConfirmeBill';
 import MainCard from 'components/MainCard';
 import { useState } from 'react';
+import { useAuth } from 'contexts/AuthContext';
 
 const BillingMain = () => {
-  const { data: bills, isLoading, isError, errorMessage, mutate } = useLazyBills(null);
+  const { token } = useAuth();
+  const { data: bills, isLoading, isError, errorMessage, mutate } = useLazyBills(token);
   const { confirmeBill } = useConfirmeBill();
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
 
   const onComplete = async (billData) => {
     try {
-      await confirmeBill(billData);
+      await confirmeBill(billData, token);
       await mutate();
       setSnackbar({ open: true, message: 'Pago confirmado correctamente', severity: 'success' });
     } catch (error) {
