@@ -30,6 +30,9 @@ import LogoutOutlined from '@ant-design/icons/LogoutOutlined';
 import UserOutlined from '@ant-design/icons/UserOutlined';
 import avatar1 from 'assets/images/users/avatar-1.png';
 
+//logout
+import { useAuth } from 'contexts/AuthContext';
+
 // tab panel wrapper
 function TabPanel({ children, value, index, ...other }) {
   return (
@@ -49,6 +52,7 @@ function a11yProps(index) {
 // ==============================|| HEADER CONTENT - PROFILE ||============================== //
 
 export default function Profile() {
+  const { logout } = useAuth();
   const theme = useTheme();
 
   const anchorRef = useRef(null);
@@ -133,7 +137,7 @@ export default function Profile() {
                       </Grid>
                       <Grid item>
                         <Tooltip title="Salir">
-                          <IconButton size="large" sx={{ color: 'text.primary' }}>
+                          <IconButton size="large" sx={{ color: 'text.primary' }} onClick={logout}>
                             <LogoutOutlined />
                           </IconButton>
                         </Tooltip>
