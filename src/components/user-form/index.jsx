@@ -41,6 +41,7 @@ const UserModalForm = ({ modalType, open, handleClose, usuarioData, onSave, isLo
     valor_mensualidad: usuarioData?.valor_mensualidad || '',
     categoria: usuarioData?.categoria || '',
     telefono: usuarioData?.telefono || '',
+    fecha_cumpleanos: usuarioData?.fecha_cumpleanos || '',
     activo: usuarioData?.activo || true
   });
 
@@ -140,6 +141,14 @@ const UserModalForm = ({ modalType, open, handleClose, usuarioData, onSave, isLo
                 startAdornment: <InputAdornment position="start">$</InputAdornment>
               }}
               value={formData?.valor_mensualidad || ''}
+            />
+            <DatePickerField
+              label="Fecha de Cumpleaños"
+              name="fecha_cumpleanos"
+              value={formData?.fecha_cumpleanos || ''}
+              setFieldValue={handleDateChange}
+              fullWidth
+              margin="normal"
             />
           </Stack>
           <Button type="submit" variant="contained" color="primary" disabled={isLoading}>

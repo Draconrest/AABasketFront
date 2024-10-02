@@ -68,6 +68,7 @@ const UsersTable = ({ usuarios, onEdit, onDelete }) => {
               <TableCell>Valor Mensualidad</TableCell>
               <TableCell>Categoría</TableCell>
               <TableCell>Teléfono</TableCell>
+              <TableCell>Cumpleaños</TableCell>
               <TableCell>Acciones</TableCell>
             </StyledTableHeadRow>
           </TableHead>
@@ -80,6 +81,7 @@ const UsersTable = ({ usuarios, onEdit, onDelete }) => {
                 <TableCell>{`$ ${usuario.valor_mensualidad}`}</TableCell>
                 <TableCell>{usuario.categoria}</TableCell>
                 <TableCell>{usuario.telefono}</TableCell>
+                <TableCell>{usuario.fecha_cumpleanos}</TableCell>
                 <TableCell>
                   <IconButton onClick={() => onEdit(usuario.id)} color="success">
                     <EditOutlined />
