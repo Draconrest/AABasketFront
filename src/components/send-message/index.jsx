@@ -5,7 +5,7 @@ import notification from 'assets/images/whatsapp/notification.webp';
 import PropTypes from 'prop-types';
 //import { useTheme } from '@mui/material/styles';
 
-const SendWhatsappMessage = ({ title, description, onSave, type, isLoading }) => {
+const SendWhatsappMessage = ({ title, description, onSave, type, isLoading, isDisabled }) => {
   //const theme = useTheme();
   //const titleColor = theme.palette.secondaryAA.main;
   const isWelcome = type === 'welcome';
@@ -20,9 +20,14 @@ const SendWhatsappMessage = ({ title, description, onSave, type, isLoading }) =>
           <Typography variant="h5" sx={{ marginBottom: '2rem' }}>
             {description}
           </Typography>
-          <Button variant="contained" onClick={onSave} disabled={isLoading}>
+          <Button variant="contained" onClick={onSave} disabled={isLoading || isDisabled}>
             {isLoading ? <CircularProgress size={24} /> : 'Enviar'}
           </Button>
+          {isDisabled && (
+            <Typography variant="caption" sx={{ color: 'text.disabled', marginTop: '1rem', marginLeft: '1rem' }}>
+              Esta funcionalidad no está disponible en esta versión.
+            </Typography>
+          )}
         </Grid>
         <Grid item xs={12} md={6}>
           <Typography variant="h6">Vista previa</Typography>
@@ -66,5 +71,6 @@ SendWhatsappMessage.propTypes = {
   description: PropTypes.string.isRequired,
   onSave: PropTypes.func.isRequired,
   type: PropTypes.oneOf(['welcome', 'notification']).isRequired,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
+  isDisabled: PropTypes.bool
 };

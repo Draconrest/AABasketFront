@@ -12,9 +12,10 @@ import {
   styled,
   Button
 } from '@mui/material';
-import { CheckCircleOutlined } from '@ant-design/icons';
+import { CheckCircleOutlined, WhatsAppOutlined } from '@ant-design/icons';
 import MainCard from 'components/MainCard';
 import PropTypes from 'prop-types';
+import { Box } from '@mui/system';
 
 const StyledTextField = styled(TextField)`
   margin-bottom: 16px;
@@ -71,7 +72,9 @@ const BillsTable = ({ bills, onComplete }) => {
               <TableCell>Fecha de corte</TableCell>
               <TableCell>Valor Mensualidad</TableCell>
               <TableCell>Estado de pago</TableCell>
-              <TableCell>Acciones</TableCell>
+              <TableCell width={500} align="center">
+                Acciones
+              </TableCell>
             </StyledTableHeadRow>
           </TableHead>
           <TableBody>
@@ -83,15 +86,26 @@ const BillsTable = ({ bills, onComplete }) => {
                 <TableCell>{`$ ${bill.monto}`}</TableCell>
                 <StyledTableCell estado={bill.estado}>{bill.estado ? 'Pagado' : 'Pendiente'}</StyledTableCell>
                 <TableCell>
-                  <Button
-                    variant="outlined"
-                    color="success"
-                    startIcon={<CheckCircleOutlined />}
-                    onClick={() => onComplete(bill)}
-                    disabled={bill.estado}
-                  >
-                    Marcar como pagado
-                  </Button>
+                  <Box display="flex" flexDirection="row" gap={2} justifyContent={'center'}>
+                    <Button
+                      variant="outlined"
+                      color="success"
+                      startIcon={<CheckCircleOutlined />}
+                      onClick={() => onComplete(bill)}
+                      disabled={bill.estado}
+                    >
+                      Marcar como pagado
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      color="warning"
+                      startIcon={<WhatsAppOutlined />}
+                      onClick={() => onComplete(bill)}
+                      disabled={true}
+                    >
+                      Enviar notificación
+                    </Button>
+                  </Box>
                 </TableCell>
               </TableRow>
             ))}

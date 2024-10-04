@@ -58,7 +58,7 @@ const WhatsappServices = () => {
         <Typography variant="h2" sx={{ marginBottom: '1rem', color: '#325170', fontWeight: 'bold' }}>
           Servicios de Whatsapp
         </Typography>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} mb={2}>
           <Grid item xs={12} md={6}>
             <SendWhatsappMessage
               title={'Enviar Notificación'}
@@ -66,6 +66,7 @@ const WhatsappServices = () => {
               type={'notification'}
               onSave={handleSendNotification}
               isLoading={isLoading}
+              isDisabled={true}
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -73,6 +74,7 @@ const WhatsappServices = () => {
               title={'Enviar Mensaje Bienvenida'}
               description={'Envía mensaje de bienvenida a usuarios nuevos.'}
               type={'welcome'}
+              isDisabled={true}
             />
           </Grid>
         </Grid>
