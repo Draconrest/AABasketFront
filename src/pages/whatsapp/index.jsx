@@ -7,13 +7,13 @@ import { useState } from 'react';
 import { useAuth } from 'contexts/AuthContext';
 
 const WhatsappServices = () => {
-  const { token } = useAuth();
+  const { accessToken } = useAuth();
   const { sendNotification, isLoading /* isError */ } = useSendNotification();
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
 
   const handleSendNotification = async () => {
     try {
-      await sendNotification(token);
+      await sendNotification(accessToken);
       setSnackbar({ open: true, message: 'Notificaciones enviadas exitosamente', severity: 'success' });
     } catch (error) {
       setSnackbar({ open: true, message: 'Error al enviar notificaciones', severity: 'error' });

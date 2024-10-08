@@ -2,14 +2,16 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-const endpoint = import.meta.env.VITE_PUBLIC_HOST_ENDPOINT + '/token';
+const refreshTokenEndpoint = import.meta.env.VITE_PUBLIC_HOST_ENDPOINT + '/token';
+const endpoint = import.meta.env.VITE_PUBLIC_HOST_ENDPOINT + '/login';
 const AuthContext = createContext(undefined);
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(() => {
-    // Recuperar token del localStorage al cargar la página
-    const storedToken = localStorage.getItem('token');
-    return storedToken ?? null;
+  const [accessToken, setAccessToken] = useState(() => {
+    return localStorage.getItem('access_token') ?? null;
+  });
+  const [refreshToken, setRefreshToken] = useState(() => {
+    return localStorage.getItem('refresh_token') ?? null;
   });
 
   const login = async (username, password) => {
@@ -24,7 +26,8 @@ export const AuthProvider = ({ children }) => {
         }
       });
 
-      setToken(response.data.access_token);
+      setAccessToken(response.data.access_token);
+      setRefreshToken(response.data.refresh_token);
     } catch (error) {
       console.error('Login error', error);
       throw new Error('Login failed');
@@ -33,19 +36,44 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     // Implementa aquí la lógica para eliminar el token
-    setToken(null);
-    localStorage.removeItem('token');
+    setAccessToken(null);
+    setRefreshToken(null);
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+  };
+
+  const refreshAccessToken = async () => {
+    try {
+      const response = await axios.post(refreshTokenEndpoint, { refresh_token: refreshToken });
+      const newAccessToken = response.data.access_token;
+
+      setAccessToken(newAccessToken); // Update React state
+      localStorage.setItem('access_token', newAccessToken); // Update localStorage
+      return newAccessToken;
+    } catch (error) {
+      console.error('Token refresh error', error);
+      logout(); // Log out if token refresh fails
+      throw new Error('Failed to refresh token');
+    }
   };
 
   useEffect(() => {
-    if (token) {
-      localStorage.setItem('token', token);
+    if (accessToken) {
+      localStorage.setItem('access_token', accessToken);
     } else {
-      localStorage.removeItem('token');
+      localStorage.removeItem('access_token');
     }
-  }, [token]);
+  }, [accessToken]);
 
-  return <AuthContext.Provider value={{ token, setToken, login, logout }}>{children}</AuthContext.Provider>;
+  useEffect(() => {
+    if (refreshToken) {
+      localStorage.setItem('refresh_token', refreshToken);
+    } else {
+      localStorage.removeItem('refresh_token');
+    }
+  }, [refreshToken]);
+
+  return <AuthContext.Provider value={{ accessToken, refreshToken, login, logout, refreshAccessToken }}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => {

@@ -1,6 +1,6 @@
 // hooks/useCreateUser.js
 import { useState } from 'react';
-import axios from 'axios';
+import api from 'contexts/Auth-api';
 
 const endpoint = import.meta.env.VITE_PUBLIC_HOST_ENDPOINT + '/users';
 
@@ -12,7 +12,7 @@ export function useCreateUser() {
     setIsLoading(true);
     setIsError(null);
     try {
-      const response = await axios.post(endpoint, userData, {
+      const response = await api.post(endpoint, userData, {
         headers: {
           Authorization: `Bearer ${token}`
         }

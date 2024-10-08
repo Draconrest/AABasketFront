@@ -14,14 +14,13 @@ import { useCreateUser } from 'hooks/usePost';
 import { useDeleteUser } from 'hooks/useDelete';
 import { useUpdateUser } from 'hooks/useUpdate';
 import { useAuth } from 'contexts/AuthContext';
-
 const StyledButton = styled(Button)`
   margin-bottom: 16px;
   width: 20%;
 `;
 const UsersAdminInfo = () => {
-  const { token } = useAuth();
-  const { data: usuarios, isLoading, isError, errorMessage, mutate } = useLazyUsers(token);
+  const { accessToken } = useAuth();
+  const { data: usuarios, isLoading, isError, errorMessage, mutate } = useLazyUsers(accessToken);
   const { createUser, isLoading: isCreating, error: createError } = useCreateUser();
   const { deleteUser } = useDeleteUser();
   const { updateUser } = useUpdateUser();
@@ -42,7 +41,7 @@ const UsersAdminInfo = () => {
 
   const handleDelete = async (id) => {
     try {
-      await deleteUser(id, token);
+      await deleteUser(id, accessToken);
       setSnackbar({ open: true, message: 'Usuario eliminado exitosamente', severity: 'success' });
       mutate();
     } catch (error) {
@@ -52,7 +51,7 @@ const UsersAdminInfo = () => {
 
   const handleSave = async (userData) => {
     try {
-      await updateUser(userData, token);
+      await updateUser(userData, accessToken);
       setSnackbar({ open: true, message: 'Usuario actualizado exitosamente', severity: 'success' });
       mutate();
     } catch (error) {
@@ -62,7 +61,7 @@ const UsersAdminInfo = () => {
 
   const handleCreateUser = async (userData) => {
     try {
-      await createUser(userData, token);
+      await createUser(userData, accessToken);
       setSnackbar({ open: true, message: 'Usuario creado exitosamente', severity: 'success' });
       mutate();
     } catch (error) {

@@ -83,7 +83,7 @@ const BillsTable = ({ bills, onComplete }) => {
                 <TableCell>{bill.nombre}</TableCell>
                 <TableCell>{bill.fecha_pago}</TableCell>
                 <TableCell>{bill.fecha_vencimiento}</TableCell>
-                <TableCell>{`$ ${bill.monto}`}</TableCell>
+                <TableCell>{`$ ${bill.monto.toLocaleString('es-CO')}`}</TableCell>
                 <StyledTableCell estado={bill.estado}>{bill.estado ? 'Pagado' : 'Pendiente'}</StyledTableCell>
                 <TableCell>
                   <Box display="flex" flexDirection="row" gap={2} justifyContent={'center'}>

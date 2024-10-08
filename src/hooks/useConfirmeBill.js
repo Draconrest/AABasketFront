@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from 'contexts/Auth-api';
 
 const endpoint = import.meta.env.VITE_PUBLIC_HOST_ENDPOINT + '/pagos/pago_pendiente';
 
@@ -12,7 +12,7 @@ export function useConfirmeBill() {
     setIsLoading(true);
     setIsError(null);
     try {
-      const response = await axios.put(confirmeEndpoint, billData, {
+      const response = await api.put(confirmeEndpoint, billData, {
         headers: {
           Authorization: `Bearer ${token}`
         }

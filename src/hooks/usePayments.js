@@ -1,7 +1,6 @@
 // hooks/useCreateUser.js
 import { useState } from 'react';
-import axios from 'axios';
-
+import api from 'contexts/Auth-api';
 const endpoint = import.meta.env.VITE_PUBLIC_HOST_ENDPOINT + '/crear_pagos';
 
 export function useCreatePayments() {
@@ -12,7 +11,7 @@ export function useCreatePayments() {
     setIsLoading(true);
     setIsError(null);
     try {
-      const response = await axios.get(endpoint, {
+      const response = await api.get(endpoint, {
         headers: {
           Authorization: `Bearer ${token}`
         }

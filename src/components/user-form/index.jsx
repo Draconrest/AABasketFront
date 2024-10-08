@@ -93,6 +93,7 @@ const UserModalForm = ({ modalType, open, handleClose, usuarioData, onSave, isLo
               >
                 <FormControlLabel value="Full" control={<Radio />} label="Full" />
                 <FormControlLabel value="Ticket" control={<Radio />} label="Ticketera" />
+                <FormControlLabel value="Becado" control={<Radio />} label="Becado" />
               </RadioGroup>
             </FormControl>
             <FormControl>
@@ -143,7 +144,7 @@ const UserModalForm = ({ modalType, open, handleClose, usuarioData, onSave, isLo
               value={formData?.valor_mensualidad || ''}
             />
             <DatePickerField
-              label="Fecha de Cumpleaños"
+              label="Fecha de Nacimiento"
               name="fecha_cumpleanos"
               value={formData?.fecha_cumpleanos || ''}
               setFieldValue={handleDateChange}

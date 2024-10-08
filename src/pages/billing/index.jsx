@@ -8,15 +8,15 @@ import { useState } from 'react';
 import { useAuth } from 'contexts/AuthContext';
 
 const BillingMain = () => {
-  const { token } = useAuth();
-  const { data: bills, isLoading, isError, errorMessage, mutate } = useLazyBills(token);
+  const { accessToken } = useAuth();
+  const { data: bills, isLoading, isError, errorMessage, mutate } = useLazyBills(accessToken);
   const { createPayment, isLoading: loadingPayment } = useCreatePayments();
   const { confirmeBill } = useConfirmeBill();
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
 
   const onComplete = async (billData) => {
     try {
-      await confirmeBill(billData, token);
+      await confirmeBill(billData, accessToken);
       await mutate();
       setSnackbar({ open: true, message: 'Pago confirmado correctamente', severity: 'success' });
     } catch (error) {
@@ -26,7 +26,7 @@ const BillingMain = () => {
 
   const handleCreatePayment = async () => {
     try {
-      await createPayment(token);
+      await createPayment(accessToken);
       await mutate();
       setSnackbar({ open: true, message: 'Pagos creados exitosamente', severity: 'success' });
     } catch (error) {

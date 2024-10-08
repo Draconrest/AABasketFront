@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
-
+import api from 'contexts/Auth-api';
 const endpoint = import.meta.env.VITE_PUBLIC_HOST_ENDPOINT + '/users';
 
 export function useUpdateUser() {
@@ -12,7 +11,7 @@ export function useUpdateUser() {
     setIsLoading(true);
     setIsError(null);
     try {
-      const response = await axios.put(updateEndpoint, userData, {
+      const response = await api.put(updateEndpoint, userData, {
         headers: {
           Authorization: `Bearer ${token}`
         }

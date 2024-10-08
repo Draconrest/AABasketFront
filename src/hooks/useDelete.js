@@ -1,7 +1,6 @@
 // hooks/useCreateUser.js
 import { useState } from 'react';
-import axios from 'axios';
-
+import api from 'contexts/Auth-api';
 const endpoint = import.meta.env.VITE_PUBLIC_HOST_ENDPOINT + '/users';
 
 export function useDeleteUser() {
@@ -13,7 +12,7 @@ export function useDeleteUser() {
     setIsLoading(true);
     setIsError(null);
     try {
-      const response = await axios.delete(deleteEndpoint, {
+      const response = await api.delete(deleteEndpoint, {
         headers: {
           Authorization: `Bearer ${token}`
         }

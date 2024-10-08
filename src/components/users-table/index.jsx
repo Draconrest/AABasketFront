@@ -68,7 +68,7 @@ const UsersTable = ({ usuarios, onEdit, onDelete }) => {
               <TableCell>Valor Mensualidad</TableCell>
               <TableCell>Categoría</TableCell>
               <TableCell>Teléfono</TableCell>
-              <TableCell>Cumpleaños</TableCell>
+              <TableCell>Fecha Nacimiento</TableCell>
               <TableCell>Acciones</TableCell>
             </StyledTableHeadRow>
           </TableHead>
@@ -78,7 +78,7 @@ const UsersTable = ({ usuarios, onEdit, onDelete }) => {
                 <TableCell>{usuario.nombre}</TableCell>
                 <TableCell>{usuario.tipo_afiliacion}</TableCell>
                 <TableCell>{usuario.fecha_matricula}</TableCell>
-                <TableCell>{`$ ${usuario.valor_mensualidad}`}</TableCell>
+                <TableCell>{`$ ${usuario.valor_mensualidad.toLocaleString('es-CO')}`}</TableCell>
                 <TableCell>{usuario.categoria}</TableCell>
                 <TableCell>{usuario.telefono.slice(2)}</TableCell>
                 <TableCell>{usuario.fecha_cumpleanos}</TableCell>
